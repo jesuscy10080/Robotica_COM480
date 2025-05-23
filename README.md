@@ -232,10 +232,10 @@ La IA estructura el código de manera que:
 
 ## 📐 Diagrama del Circuito
 
-*[Aquí irá tu esquema del circuito creado por tu cuenta]*
 
-![Esquema del circuito completo](ruta-esquema-circuito.png)
-![alt text](Diagrama_REL_NEMA.png)
+
+![Esquema del circuito completo](/imagenes/Diagrama_REL_NEMA.png)
+
 
 ### Conexiones Principales:
 

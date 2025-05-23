@@ -1,14 +1,14 @@
 # Proyecto de Robótica con Control Web 🤖
 
-Un proyecto de aprendizaje donde pruebo y sincronizo diferentes componentes electrónicos (sensores, motores, relés) controlándolos desde una página web para entender cómo funcionan juntos.
+Este es un proyecto de aprendizaje colaborativo donde probamos y sincronizamos diferentes componentes electrónicos para despues poder desarrollar un **horno giratorio controlado por internet**. Este prototipo nos ayuda a entender cómo funcionan juntos todos los elementos antes de construir el proyecto del horno.
 
-![Imagen principal del proyecto](ruta-de-tu-imagen-principal.jpg)
+![Imagen principal del proyecto](ruta-de-la-imagen-principal.jpg)
 
 ## 📋 Tabla de Contenidos
 
 - [Descripción del Proyecto](#descripción-del-proyecto)
 - [Componentes Utilizados](#componentes-utilizados)
-- [¿Cómo Funciona Mi Experimento?](#cómo-funciona-mi-experimento)
+- [¿Cómo Funciona este proyecto?](#cómo-funciona-mi-experimento)
 - [Arquitectura del Código](#arquitectura-del-código)
 - [Uso de IA en el Desarrollo](#uso-de-ia-en-el-desarrollo)
 - [Diagrama del Circuito](#diagrama-del-circuito)
@@ -16,85 +16,152 @@ Un proyecto de aprendizaje donde pruebo y sincronizo diferentes componentes elec
 - [Uso del Sistema](#uso-del-sistema)
 - [Capturas de Pantalla](#capturas-de-pantalla)
 - [Código Fuente](#código-fuente)
+- [Próximos Pasos: Proyecto de un Horno Giratorio](#próximos-pasos-horno-giratorio)
 - [Conclusiones y Aprendizajes](#conclusiones-y-aprendizajes)
+- [Autores](#autores)
 
 ## 🎯 Descripción del Proyecto
 
-Este es un **proyecto de aprendizaje y experimentación** donde estoy probando cómo hacer funcionar diferentes componentes electrónicos y sincronizarlos entre sí. El objetivo es entender cómo conectar sensores, motores y relés, y controlarlos todos desde una página web.
-
-### ¿Qué estoy aprendiendo?
-
-- **🔌 Conexión de componentes**: Cómo conectar correctamente sensores, motores y relés al Arduino
-- **⚡ Sincronización**: Hacer que todos los componentes trabajen juntos sin conflictos
-- **🌐 Control web**: Crear una página web que pueda enviar comandos a los componentes
-- **📡 Comunicación**: Usar Ethernet para que el Arduino "hable" con dispositivos externos
-- **🧠 Lógica de control**: Programar comportamientos inteligentes (como que el motor cambie según las luces)
-
-### ¿Qué hace este prototipo?
-
-- **📊 Lee sensores**: Mide temperatura y humedad con un sensor DHT11
-- **💡 Controla luces**: Enciende/apaga un foco (con relé) y un LED
-- **🔄 Mueve un motor**: Un motor paso a paso que gira según lo que esté encendido
-- **🌐 Interfaz web**: Una página donde puedes controlar todo desde cualquier dispositivo
-
-### 🎭 Comportamiento Programado del Motor
-
-Para probar la sincronización, programé el motor con diferentes comportamientos:
-
-1. **Solo foco encendido**: Motor gira hacia la **izquierda** continuamente
-2. **Solo LED encendido**: Motor gira hacia la **derecha** continuamente  
-3. **Ambos encendidos**: Motor **alterna direcciones** automáticamente cada vuelta completa
-
-### 🔮 ¿Para qué es esta experiencia?
-
-Este proyecto me está preparando para crear un **sistema real en el futuro**: un horno que se pueda controlar completamente desde una página web. Por ahora, estoy aprendiendo los fundamentos de cómo hacer que todos estos componentes funcionen juntos correctamente.
+Este es un **proyecto colaborativo de aprendizaje** desarrollado entre dos personas, donde estamos probando paso a paso cómo hacer funcionar diferentes componentes electrónicos y sincronizarlos para que trabajen juntos como un sistema integrado.
 
 ## 🔧 Componentes Utilizados
 
 ### Hardware Principal
 
+| Componente | Cantidad | Función en el Prototipo | Función en el Horno Final |
+|------------|----------|------------------------|---------------------------|
+| Arduino UNO | 1 | Microcontrolador principal | Cerebro del sistema de control |
+| Shield Ethernet W5100 | 1 | Conectividad de red | Control remoto por internet |
+| Motor NEMA 23 | 1 | Pruebas de rotación | Hacer girar parrilla/spiedo |
+| Driver DRV8825 | 1 | Control del motor paso a paso | Control preciso de rotación |
+| Módulo Relé 5V | 1 | Conmutación de potencia | Encender/apagar resistencias |
+| Sensor DHT11 | 1 | Medición temp/humedad | Sensor de temperatura interna |
+| Foco/Bombilla | 1 | Simular calefacción | Elemento calefactor real |
+| LED | 1 | Indicador de estado | Luz "Horno Encendido" |
+
+### Componentes de Soporte
+
 | Componente | Cantidad | Función |
 |------------|----------|---------|
-| Arduino UNO | 1 | Microcontrolador principal |
-| Shield Ethernet W5100 | 1 | Conectividad de red |
-| Motor NEMA 23 | 1 | Actuador mecánico |
-| Driver DRV8825 | 1 | Control del motor paso a paso |
-| Módulo Relé 5V | 1 | Conmutación de alta potencia |
-| Sensor DHT11 | 1 | Medición de temperatura/humedad |
-| LED | 1 | Indicador visual |
-| Foco/Lámpara | 1 | Iluminación controlada |
+| Resistencia para LED | 1 | Limitar corriente del LED (220Ω - 1kΩ) |
+| Capacitor electrolítico | 1 | Estabilizar alimentación del DRV8825 (100μF) |
+| Jumpers macho-macho | 20+ | Conexiones en protoboard |
+| Jumpers macho-hembra | 10+ | Conexiones Arduino-componentes |
+| Jumpers hembra-hembra | 10+ | Conexiones entre módulos |
+| Protoboard | 1 | Base para conexiones temporales |
+| Cable Ethernet | 1 | Conexión a red local |
 
-### Componentes Auxiliares
+### Alimentación
 
-- Fuente de alimentación 12V (para motor)
-- Cables de conexión
-- Resistencias
-- Protoboard o PCB
+| Componente | Especificaciones | Función |
+|------------|------------------|---------|
+| Fuente 12V DC | 2A mínimo | Alimentación para motor NEMA 23 |
+| Cable USB | Tipo A-B | Alimentación Arduino + programación |
+
+### Herramientas Necesarias
+
+- Multímetro (para verificar conexiones)
+- Destornilladores pequeños (ajustar driver DRV8825)
+- Alicate pelacables
+- Soldador (para conexiones permanentes - opcional)
 
 ![Imagen de componentes](ruta-de-imagen-componentes.jpg)
 
-## ⚙️ ¿Cómo Funciona Mi Experimento?
 
-### 1. **📊 Prueba de Sensores**
-- Conecté un sensor DHT11 que lee temperatura y humedad cada 2 segundos
-- Los datos aparecen en tiempo real en la página web para verificar que funciona
-- Agregué una barra visual que cambia de color según la temperatura
+### 🔬 Objetivo del Proyecto de Pruebas
 
-### 2. **💡 Prueba de Actuadores**
-- **Relé**: Probé cómo controlar un foco de alta potencia de forma segura
-- **LED**: Un indicador simple para verificar que las señales digitales funcionan
-- **Motor paso a paso**: El componente más complejo, que requiere un driver especial
+El objetivo principal de este prototipo es **aprender haciendo** - probando los componente y  a la vez sincronizándolos para luego integrándolos todos en un sistema que se pueda controlar desde una página web. Queremos entender:
 
-### 3. **🌐 Interfaz de Control**
-- Creé una página web que se conecta al Arduino via Ethernet
-- Botones que envían comandos específicos a cada componente
-- Se actualiza automáticamente para mostrar el estado actual de todo
-- Funciona desde cualquier dispositivo conectado a la misma red
+- **🔌 Cómo conectar** correctamente cada tipo de componente al Arduino
+- **⚡ Cómo evitar conflictos** cuando múltiples componentes trabajan simultáneamente  
+- **🧠 Cómo programar** comportamientos inteligentes donde un componente afecta a otros
+- **🌐 Cómo crear** una interfaz web que controle hardware real
+- **📡 Cómo usar** Ethernet para comunicación en tiempo real
 
-### 4. **🧠 Lógica de Sincronización**
-- Programé el sistema para que los componentes "se comuniquen" entre sí
-- Cuando cambio el estado de las luces, el motor automáticamente cambia su comportamiento
-- Esto me ayuda a entender cómo crear sistemas donde una acción desencadena múltiples respuestas
+### 🎯 Metodología: Prueba Paso a Paso
+
+Desarrollamos el proyecto siguiendo una metodología sistemática, probando cada componente individualmente antes de integrarlos:
+
+#### **Paso 1: Prueba del LED 💡**
+- **Objetivo**: Verificar que podemos controlar señales digitales básicas
+- **Qué probamos**: Encender y apagar un LED desde el Arduino
+- **Aprendizaje**: Uso de `digitalWrite()`, resistencias limitadoras, conexiones básicas
+- **Estado**: ✅ **Completado** - LED responde correctamente a comandos
+
+#### **Paso 2: Prueba del Foco con Relé 🔌**
+- **Objetivo**: Controlar dispositivos de alta potencia de forma segura
+- **Qué probamos**: Usar un relé para encender/apagar un foco de 220V
+- **Aprendizaje**: Diferencia entre lógica HIGH/LOW para relés, aislamiento eléctrico, seguridad
+- **Estado**: ✅ **Completado** - Relé controla el foco sin problemas
+
+#### **Paso 3: Prueba del Sensor de Temperatura 🌡️**
+- **Objetivo**: Leer datos de sensores y mostrarlos en tiempo real
+- **Qué probamos**: Obtener lecturas de temperatura y humedad del DHT11
+- **Aprendizaje**: Uso de librerías, manejo de datos analógicos, temporización de lecturas
+- **Estado**: ✅ **Completado** - Sensor proporciona datos estables cada 2 segundos
+
+#### **Paso 4: Prueba del Motor Paso a Paso 🔄**
+- **Objetivo**: Controlar movimiento preciso y continuo
+- **Qué probamos**: Hacer girar un motor NEMA 23 con driver DRV8825
+- **Aprendizaje**: Control de motores paso a paso, uso de drivers, pulsos de control
+- **Estado**: ✅ **Completado** - Motor gira suavemente en ambas direcciones
+
+### 🔗 Fase de Integración y Sincronización
+
+Una vez que cada componente funcionó individualmente, el verdadero desafío fue hacerlos trabajar juntos:
+
+#### **Desafío 1: Gestión de Memoria**
+- **Problema**: El Arduino UNO tiene poca memoria RAM (2KB)
+- **Solución**: Optimizamos el código usando `F()` para guardar strings en Flash
+- **Resultado**: Código funciona sin errores de memoria
+
+#### **Desafío 2: Temporización Sin Bloqueos**
+- **Problema**: Múltiples componentes necesitan timing diferente
+- **Solución**: Usamos `millis()` para control no bloqueante
+- **Resultado**: Todos los componentes funcionan simultáneamente
+
+#### **Desafío 3: Comportamientos Inteligentes**
+- **Problema**: Queremos que el motor responda al estado de las luces
+- **Solución**: Programamos lógica condicional donde el motor cambia según los otros componentes
+- **Resultado**: Sistema que responde de forma inteligente a diferentes combinaciones
+
+### 🌐 Interfaz Web de Control
+
+Creamos una página web que:
+- **📱 Funciona** en cualquier dispositivo (celular, tablet, computadora)
+- **🔄 Se actualiza** automáticamente cada 5 segundos
+- **🎮 Permite controlar** todos los componentes con botones simples
+- **📊 Muestra** datos en tiempo real (temperatura, humedad, estado de dispositivos)
+- **🎨 Tiene diseño** moderno y responsive
+
+### 🎭 Comportamientos Programados para Pruebas
+
+Para verificar que la sincronización funciona, programamos comportamientos específicos:
+
+| Estado de Componentes | Comportamiento del Motor | Propósito de la Prueba |
+|----------------------|--------------------------|------------------------|
+| **Solo LED encendido** | Gira hacia la derecha | Probar control básico |
+| **Solo Foco encendido** | Gira hacia la izquierda | Probar integración con relé |
+| **Ambos encendidos** | Gira detenidamnte a la derecha | Probar lógica compleja |
+| **Nada encendido** | Motor detenido | Probar estado de reposo |
+
+### ✅ Resultados del Proyecto de Pruebas
+
+**🎯 Objetivos Alcanzados:**
+- ✅ Todos los componentes funcionan correctamente por separado
+- ✅ La integración entre componentes es estable y sin conflictos
+- ✅ La interfaz web controla el hardware de forma confiable
+- ✅ El sistema responde en tiempo real a los comandos
+- ✅ La sincronización entre componentes funciona como se programó
+
+**📚 Conocimientos Adquiridos:**
+- ✅ Manejo de componentes electrónicos diversos
+- ✅ Programación de microcontroladores con múltiples tareas
+- ✅ Desarrollo de interfaces web embebidas
+- ✅ Optimización de código para recursos limitados
+- ✅ Trabajo colaborativo en proyectos técnicos
+
+---
 
 ## 🏗️ Arquitectura del Código
 
@@ -227,271 +294,4 @@ La IA estructura el código de manera que:
 
 ![Imagen de conexiones](ruta-imagen-conexiones.jpg)
 
-## 🚀 Instalación y Configuración
 
-### Prerrequisitos
-
-1. **Software**:
-   - Arduino IDE 1.8.x o superior
-   - Librería Ethernet
-   - Librería DHT sensor library
-
-2. **Hardware**:
-   - Todos los componentes listados anteriormente
-   - Cable Ethernet
-   - Router/Switch con puertos disponibles
-
-### Pasos de Instalación
-
-1. **Clonar el repositorio**:
-   ```bash
-   git clone https://github.com/tu-usuario/robotica-ethernet.git
-   cd robotica-ethernet
-   ```
-
-2. **Instalar librerías necesarias**:
-   ```
-   Arduino IDE → Sketch → Include Library → Manage Libraries
-   Buscar e instalar:
-   - "DHT sensor library" by Adafruit
-   - "Ethernet" (ya incluida en Arduino IDE)
-   ```
-
-3. **Configurar red**:
-   ```cpp
-   // Modificar en el código si es necesario
-   byte MAC[] = { 0xDE, 0xAD, 0xBE, 0xFA, 0x3B, 0xAA };
-   IPAddress ip(192, 168, 10, 32);  // Cambiar según tu red
-   ```
-
-4. **Cargar el código**:
-   - Conectar Arduino vía USB
-   - Seleccionar puerto correcto
-   - Compilar y cargar el sketch
-
-5. **Conectar hardware**:
-   - Seguir el diagrama de conexiones
-   - Verificar alimentación externa para motor
-   - Conectar cable Ethernet
-
-### Verificación de Funcionamiento
-
-1. Abrir Monitor Serie (9600 baudios)
-2. Verificar que aparezca: "Servidor iniciado" e IP asignada
-3. Desde un navegador, ir a la IP mostrada
-4. Verificar que aparezca la interfaz web
-
-## 💻 Uso del Sistema
-
-### Acceso a la Interfaz Web
-
-1. **Conectar** a la misma red que el Arduino
-2. **Abrir navegador** en cualquier dispositivo
-3. **Navegar** a la IP mostrada en el Monitor Serie (ej: `192.168.10.32`)
-4. **Interactuar** con los controles
-
-![Captura de pantalla de la interfaz](ruta-captura-interfaz.png)
-
-### Controles Disponibles
-
-#### 🔄 Botones de Control:
-
-| Botón | Función | Comportamiento del Motor |
-|-------|---------|-------------------------|
-| **Encender Foco** | Activa relé + foco | Giro continuo izquierda ⬅️ |
-| **Encender LED** | Activa LED | Giro continuo derecha ➡️ |
-| **Encender Ambos** | Activa foco + LED | Alternancia automática ⬅️➡️ |
-
-#### 📊 Información Mostrada:
-
-- **Temperatura actual** en °C
-- **Humedad relativa** en %
-- **Barra visual** de confort térmico
-- **Estado en tiempo real** de todos los dispositivos
-- **Comportamiento actual** del motor
-
-### Modos de Operación
-
-#### Modo Foco (Solo)
-```
-🔥 Foco: ENCENDIDO
-💡 LED: APAGADO
-🔄 Motor: Giro continuo izquierda
-```
-
-#### Modo LED (Solo)  
-```
-🔥 Foco: APAGADO
-💡 LED: ENCENDIDO
-🔄 Motor: Giro continuo derecha
-```
-
-#### Modo Combinado
-```
-🔥 Foco: ENCENDIDO
-💡 LED: ENCENDIDO  
-🔄 Motor: Una vuelta izquierda → Una vuelta derecha → Repetir
-```
-
-## 📷 Capturas de Pantalla
-
-### Interfaz Principal
-*[Aquí irán tus capturas de pantalla]*
-
-![Interfaz principal](ruta-captura-principal.png)
-
-### Estados del Sistema
-![Estados diferentes](ruta-captura-estados.png)
-
-### Responsive Design
-![Vista móvil](ruta-captura-movil.png)
-
-## 💾 Código Fuente
-
-### Estructura del Proyecto
-
-```
-robotica-ethernet/
-├── README.md
-├── codigo_principal.ino
-├── documentacion/
-│   ├── esquemas/
-│   ├── imagenes/
-│   └── videos/
-└── recursos/
-    ├── librerias/
-    └── herramientas/
-```
-
-### Archivos Principales
-
-- **`codigo_principal.ino`**: Código completo del Arduino
-- **Librerías requeridas**: DHT, Ethernet, SPI
-- **Configuración**: IP, MAC, pines, constantes
-
-### Configuraciones Importantes
-
-```cpp
-// Configuración de red
-IPAddress ip(192, 168, 10, 32);  // Cambiar según tu red
-
-// Configuración de motor  
-const int PASOS_POR_VUELTA = 200;  // Ajustar según tu motor
-const long INTERVALO_PASO = 2;     // Velocidad del motor (ms)
-
-// Configuración de sensores
-const long INTERVALO_LECTURA = 2000;  // Frecuencia de lectura (ms)
-```
-
-## 🔍 Resolución de Problemas
-
-### Problemas Comunes y Soluciones
-
-#### 1. "No se conecta a la red"
-- **Verificar** cable Ethernet
-- **Comprobar** configuración de IP
-- **Revisar** que la IP no esté en uso
-
-#### 2. "Motor no se mueve"
-- **Verificar** alimentación de 12V al DRV8825
-- **Comprobar** conexiones STEP y DIR
-- **Ajustar** potenciómetro de corriente en el driver
-
-#### 3. "Sensor DHT da error"
-- **Verificar** conexiones VCC, GND y DATA
-- **Esperar** 2 segundos entre lecturas
-- **Comprobar** que el sensor no esté dañado
-
-#### 4. "Página web no carga"
-- **Verificar** que Arduino esté conectado y funcionando
-- **Comprobar** IP en Monitor Serie
-- **Probar** desde diferentes dispositivos
-
-## 📈 Próximos Pasos y Mejoras
-
-### 🔥 Proyecto Principal: Horno Controlado por Web
-
-Con los conocimientos adquiridos en este experimento, mi siguiente proyecto será:
-
-- **🌡️ Control de temperatura**: Usar sensores más precisos para hornos
-- **🔥 Control de resistencias**: Manejar elementos calefactores de alta potencia  
-- **⏰ Temporizadores**: Sistema de tiempo para diferentes tipos de cocción
-- **📊 Monitoreo en tiempo real**: Gráficas de temperatura durante el proceso
-- **🔔 Alertas**: Notificaciones cuando la comida esté lista
-- **📱 App móvil**: Interfaz especializada para celulares
-
-### 🔧 Mejoras a Este Prototipo
-
-Para seguir aprendiendo, podría añadir:
-
-- **📊 Guardar datos**: Almacenar temperaturas en una memoria
-- **🤖 Control automático**: Que el sistema responda solo a la temperatura
-- **🔒 Seguridad**: Contraseñas para acceder al control
-- **📡 WiFi**: Usar WiFi en lugar de cable Ethernet
-- **🌐 Control desde internet**: No solo desde la red local
-- **🎛️ Más sensores**: Presión, luz, sonido, etc.
-
-### 📚 Conocimientos que Necesito Desarrollar
-
-- **🔥 Manejo de alta temperatura**: Componentes que soporten calor extremo
-- **⚡ Sistemas de potencia**: Controlar resistencias de muchos watts
-- **🛡️ Seguridad**: Sistemas de emergencia y protecciones
-- **📊 Bases de datos**: Guardar recetas y configuraciones
-- **🔔 Comunicaciones**: Enviar mensajes y alertas
-
-## 🏆 Conclusiones y Aprendizajes
-
-### Lo que Logré en este Proyecto
-
-1. **🔧 Integración Exitosa**: Conseguí que múltiples componentes trabajaran juntos sin interferencias
-2. **🌐 Control Remoto Funcional**: Creé una interfaz web que realmente controla hardware físico
-3. **🤖 Comportamientos Programados**: Implementé lógica donde un componente afecta a otros automáticamente
-4. **📱 Diseño Universal**: La página funciona igual en computadoras, tablets y celulares
-
-### Conocimientos Técnicos Adquiridos
-
-1. **🔌 Electrónica Práctica**: Aprendí a conectar correctamente diferentes tipos de componentes
-2. **💻 Programación Embebida**: Cómo hacer que un Arduino sirva páginas web y controle hardware
-3. **⚡ Gestión de Recursos**: Optimizar código para dispositivos con poca memoria
-4. **🧠 Lógica de Control**: Programar sistemas que respondan inteligentemente a diferentes situaciones
-
-### Impacto del Uso de IA en el Desarrollo
-
-El uso de **Inteligencia Artificial** para estructurar el código HTML/CSS fue clave para:
-
-- **Evitar errores** que podrían romper la página web
-- **Optimizar el código** para funcionar en un Arduino con memoria limitada  
-- **Acelerar el desarrollo** sin sacrificar calidad
-- **Crear código limpio** que puedo entender y modificar fácilmente
-
-### Preparación para Proyectos Futuros
-
-Este experimento me da las bases necesarias para:
-- **🔥 Proyecto del Horno**: Aplicar todo lo aprendido en un sistema real de control de temperatura
-- **📊 Sistemas más complejos**: Integrar más sensores y actuadores
-- **🏠 Automatización**: Crear sistemas que tomen decisiones automáticas
-- **🌐 IoT**: Conectar dispositivos a internet para control remoto real
-
-### Valor Educativo
-
-Este proyecto demuestra cómo:
-- Combinar hardware y software de manera efectiva
-- Usar herramientas modernas (como IA) para acelerar el desarrollo
-- Crear prototipos funcionales que sirven como base para proyectos más grandes
-- Documentar el proceso de aprendizaje de manera clara y útil
-
----
-
-## 👥 Autor
-
-**[Tu Nombre]**
-- GitHub: [@tu-usuario](https://github.com/tu-usuario)
-- Email: tu.email@ejemplo.com
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para más detalles.
-
----
-
-⭐ **¡No olvides dar una estrella al proyecto si te resultó útil!** ⭐

@@ -68,7 +68,7 @@ Este es un **proyecto colaborativo de aprendizaje** desarrollado entre dos perso
 ![Imagen de componentes](ruta-de-imagen-componentes.jpg)
 
 
-### 🔬 Objetivo del Proyecto de Pruebas
+## 🔬 ¿Como funciona este proyecto?
 
 El objetivo principal de este prototipo es **aprender haciendo** - probando los componente y  a la vez sincronizándolos para luego integrándolos todos en un sistema que se pueda controlar desde una página web. Queremos entender:
 
@@ -110,29 +110,6 @@ Desarrollamos el proyecto siguiendo una metodología sistemática, probando cada
 
 Una vez que cada componente funcionó individualmente, el verdadero desafío fue hacerlos trabajar juntos:
 
-#### **Desafío 1: Gestión de Memoria**
-- **Problema**: El Arduino UNO tiene poca memoria RAM (2KB)
-- **Solución**: Optimizamos el código usando `F()` para guardar strings en Flash
-- **Resultado**: Código funciona sin errores de memoria
-
-#### **Desafío 2: Temporización Sin Bloqueos**
-- **Problema**: Múltiples componentes necesitan timing diferente
-- **Solución**: Usamos `millis()` para control no bloqueante
-- **Resultado**: Todos los componentes funcionan simultáneamente
-
-#### **Desafío 3: Comportamientos Inteligentes**
-- **Problema**: Queremos que el motor responda al estado de las luces
-- **Solución**: Programamos lógica condicional donde el motor cambia según los otros componentes
-- **Resultado**: Sistema que responde de forma inteligente a diferentes combinaciones
-
-### 🌐 Interfaz Web de Control
-
-Creamos una página web que:
-- **📱 Funciona** en cualquier dispositivo (celular, tablet, computadora)
-- **🔄 Se actualiza** automáticamente cada 5 segundos
-- **🎮 Permite controlar** todos los componentes con botones simples
-- **📊 Muestra** datos en tiempo real (temperatura, humedad, estado de dispositivos)
-- **🎨 Tiene diseño** moderno y responsive
 
 ### 🎭 Comportamientos Programados para Pruebas
 
@@ -153,13 +130,6 @@ Para verificar que la sincronización funciona, programamos comportamientos espe
 - ✅ La interfaz web controla el hardware de forma confiable
 - ✅ El sistema responde en tiempo real a los comandos
 - ✅ La sincronización entre componentes funciona como se programó
-
-**📚 Conocimientos Adquiridos:**
-- ✅ Manejo de componentes electrónicos diversos
-- ✅ Programación de microcontroladores con múltiples tareas
-- ✅ Desarrollo de interfaces web embebidas
-- ✅ Optimización de código para recursos limitados
-- ✅ Trabajo colaborativo en proyectos técnicos
 
 ---
 
@@ -182,12 +152,7 @@ Para verificar que la sincronización funciona, programamos comportamientos espe
     └── JavaScript para funcionalidad
 ```
 
-### Características Técnicas del Código
 
-- **Optimización de memoria**: Uso de `F()` macro para almacenar strings en Flash
-- **Control no bloqueante**: Uso de `millis()` para timing sin delays
-- **Manejo de estados**: Variables booleanas para control preciso
-- **Comunicación serie**: Debugging y monitoreo en tiempo real
 
 ## 🤖 Uso de IA en el Desarrollo
 
@@ -263,34 +228,18 @@ La IA estructura el código de manera que:
 3. **Optimiza el rendimiento** para dispositivos con poca memoria
 4. **Crea código mantenible** fácil de modificar
 
-### Explicación Simple (Para un Niño de 10 años):
 
-> Imagina que tienes que escribir una receta de cocina muy larga en un papel muy pequeño. Si escribes todo mezclado y sin orden, será muy difícil de leer y te puedes equivocar. La IA es como un chef experto que organiza tu receta en secciones claras: primero los ingredientes, luego los pasos, y al final las decoraciones. Así es mucho más fácil de seguir y no te equivocas.
 
 ## 📐 Diagrama del Circuito
 
 *[Aquí irá tu esquema del circuito creado por tu cuenta]*
 
 ![Esquema del circuito completo](ruta-esquema-circuito.png)
+![alt text](Diagrama_REL_NEMA.png)
 
 ### Conexiones Principales:
 
-#### Arduino → Shield Ethernet:
-- D10 → SS (Slave Select)
-- D11 → MOSI
-- D12 → MISO  
-- D13 → SCK
 
-#### Arduino → DRV8825:
-- D9 → STEP
-- D10 → DIR
-- GND → GND
-- 5V → VCC
-
-#### Arduino → Otros Componentes:
-- D7 → Relé (Señal)
-- D8 → LED (Ánodo)
-- D5 → DHT11 (Data)
 
 ![Imagen de conexiones](ruta-imagen-conexiones.jpg)
 
